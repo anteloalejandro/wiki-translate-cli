@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "wiki-translator": "^0.1.1"
+  },
+  "name": "wiki-translate-cli",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "A CLI app to translate terms using Wikipedia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anteloalejandro/wiki-translate-cli.git"
+  },
+  "keywords": [
+    "wikipedia",
+    "translate",
+    "wiki-translator"
+  ],
+  "author": "Alejandro Antelo",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/anteloalejandro/wiki-translate-cli/issues"
+  },
+  "homepage": "https://github.com/anteloalejandro/wiki-translate-cli#readme"
+}
