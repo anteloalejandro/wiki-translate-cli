@@ -40,6 +40,6 @@ wiki-translate-cli
 # interactive (will ask for sourceLang and targetLang only)
 wiki-translate-cli "python programming language"
 
-# non-interactive (if only one match if found)
+# non-interactive (if only one match is found)
 wiki-translate-cli "python programming language" en es
 ```
