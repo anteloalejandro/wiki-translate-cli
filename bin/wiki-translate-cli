@@ -2,4 +2,5 @@
 
 import { run } from "../index.js";
 
-run();
+
+run(...process.argv.slice(2));
