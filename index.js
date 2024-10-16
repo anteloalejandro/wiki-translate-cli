@@ -17,7 +17,7 @@ async function onerror(error) {
   throw error;
 }
 
-async function run() {
+export async function run() {
   const langObj = Array.from(languages).map(([a, b]) => ({ name: a, value: b }));
   function fuzzyLang(input) {
     return langObj.filter(o => fuzzysearch(input.toLowerCase(), o.name.toLowerCase()));
@@ -79,5 +79,3 @@ async function run() {
       + colors.bold("URL: ") + colors.blueBright(colors.underline(translation.url))
   );
 }
-
-run();

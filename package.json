@@ -10,6 +10,9 @@
   "version": "0.1.0",
   "description": "A CLI app to translate terms using Wikipedia",
   "main": "index.js",
+  "bin": {
+    "wiki-translate-cli": "bin/wiki-translate-cli"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
