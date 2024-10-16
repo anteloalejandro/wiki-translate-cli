@@ -1,4 +1,4 @@
-import { search, confirm } from "@inquirer/prompts";
+import { search, confirm, select } from "@inquirer/prompts";
 import { search as wikiSearch, getTranslation } from "wiki-translator";
 import { languages } from "wiki-translator/languages.js";
 import fuzzysearch from 'fuzzysearch';
@@ -47,9 +47,23 @@ export async function run(term, sourceLang, targetLang) {
   let translation = null;
   let confirmation = true
   do {
-    const id = term
-      ? (await wikiSearch(term, sourceLang))[0].pageid
-      : await search({
+    let id;
+    if (term) {
+      const pages = await wikiSearch(term, sourceLang);
+      if (pages && pages.length) {
+        id = pages.length == 1
+          ? pages[0].pageid
+          : await select({
+            message: "Matches: ",
+            choices: pages.map(o => ({
+              value: o.pageid,
+              name: o.title,
+              description: o.snippet
+            }))
+          }).catch(onerror);
+      }
+    } else {
+      id = await search({
         message: "Type a term!",
         source: async (input, { signal }) => {
           await sleep(300);
@@ -63,6 +77,7 @@ export async function run(term, sourceLang, targetLang) {
           }));
         }
       }).catch(onerror);
+    }
     term = undefined;
 
     translation = await getTranslation(id, sourceLang, targetLang);
