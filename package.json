@@ -1,7 +1,9 @@
 {
   "dependencies": {
-    "enquirer": "^2.4.1",
-    "wiki-translator": "^0.1.2"
+    "@inquirer/prompts": "^7.0.0",
+    "fuzzysearch": "^1.0.3",
+    "wiki-translator": "^0.1.2",
+    "yoctocolors-cjs": "^2.1.2"
   },
   "name": "wiki-translate-cli",
   "type": "module",
