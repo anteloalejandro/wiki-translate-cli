@@ -75,8 +75,8 @@ async function run() {
   } while (!translation && confirmation);
 
   console.log(
-    colors.green(colors.bold("Translation: ")) + colors.green(translation.title) + '\n'
-      + colors.green(colors.bold("URL: ")) + colors.blue(colors.underline(translation.url))
+    colors.bold("Translation: ") + colors.greenBright(translation.title) + '\n'
+      + colors.bold("URL: ") + colors.blueBright(colors.underline(translation.url))
   );
 }
 
