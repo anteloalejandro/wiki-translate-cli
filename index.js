@@ -88,8 +88,9 @@ export async function run(term, sourceLang, targetLang) {
     }
   } while (!translation && confirmation);
 
-  console.log(
-    colors.bold("Translation: ") + colors.greenBright(translation.title) + '\n'
-    + colors.bold("URL: ") + colors.blueBright(colors.underline(translation.url))
-  );
+  if (translation)
+    console.log(
+      colors.bold("Translation: ") + colors.greenBright(translation.title) + '\n'
+      + colors.bold("URL: ") + colors.blueBright(colors.underline(translation.url))
+    );
 }
