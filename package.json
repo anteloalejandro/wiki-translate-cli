@@ -2,7 +2,7 @@
   "dependencies": {
     "@inquirer/prompts": "^7.0.0",
     "fuzzysearch": "^1.0.3",
-    "wiki-translator": "^0.1.2",
+    "wiki-translator": "^0.1.3",
     "yoctocolors-cjs": "^2.1.2"
   },
   "name": "wiki-translate-cli",
