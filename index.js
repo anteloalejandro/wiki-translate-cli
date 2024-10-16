@@ -9,6 +9,21 @@ function fuzzyLang(input) {
   return langObj.filter(o => fuzzysearch(input.toLowerCase(), o.name.toLowerCase()));
 }
 
+/** @param {string} snippet  */
+function cleanSnippet(snippet) {
+  snippet = snippet
+    .trim()
+    .replaceAll(/<(\/)?span(\s+.*?)?>/g, '')
+    .replaceAll('&quot;', '')
+    .replaceAll(/\[\d+\]/g, '')
+    
+  if (snippet.charAt(snippet.length-1) != '.') {
+    snippet = snippet.slice(0, snippet.length-3) + '...'
+  }
+
+  return snippet;
+}
+
 async function sleep(ms) {
   await new Promise(resolve => setTimeout(resolve, ms));
   return;
@@ -58,7 +73,7 @@ export async function run(term, sourceLang, targetLang) {
             choices: pages.map(o => ({
               value: o.pageid,
               name: o.title,
-              description: o.snippet
+              description: cleanSnippet(o.snippet)
             }))
           }).catch(onerror);
       }
@@ -73,7 +88,7 @@ export async function run(term, sourceLang, targetLang) {
           return pages.map(o => ({
             value: o.pageid,
             name: o.title,
-            description: o.snippet
+            description: cleanSnippet(o.snippet)
           }));
         }
       }).catch(onerror);
