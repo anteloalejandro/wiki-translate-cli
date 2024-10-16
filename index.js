@@ -24,9 +24,7 @@ const response = await enquirer.prompt([
     message: "Search for a term: ",
   }
 ]);
-
 const pages = await search(response.term, languages.get(response.sourceLang));
-
 
 let translation = null;
 let confirmation = true

@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "enquirer": "^2.4.1",
-    "wiki-translator": "^0.1.1"
+    "wiki-translator": "^0.1.2"
   },
   "name": "wiki-translate-cli",
   "type": "module",
