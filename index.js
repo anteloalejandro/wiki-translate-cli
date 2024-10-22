@@ -48,13 +48,15 @@ async function searchLanguage(message) {
   }).catch(onerror);
 }
 
-export async function run(term, sourceLang, targetLang) {
+export async function run({term, sourceLang, targetLang, promptLang}) {
+  if (!promptLang) setTextLang(promptLang);
+
   if (!targetLang) {
     targetLang = await searchLanguage(`${getText("target-language")}: `);
     if (!targetLang) return;
   }
 
-  setTextLang(targetLang);
+  if (!promptLang) setTextLang(targetLang);
 
   if (!sourceLang) {
     sourceLang = await searchLanguage(`${getText("source-language")}: `);

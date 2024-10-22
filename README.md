@@ -26,20 +26,23 @@ sudo npm link
 
 ## Use
 
-This app is interactive by default. The first 3 arguments will be interpreted as
-`<term>`, `<sourceLang>` and `<targetLang>` respectively.
+This app is interactive by default. 3 options are available:
+- `--from <sourceLang>`: Language to translate from
+- `--to <targetLang>`: Language to translate to.
+- `--prompt-lang <promptLang>`: Language of the prompts. If unset, will be set to `<targetLang>` if available.
 
-If any of those is missing, it will ask you to input it interactively.
+Any other arguments will be interpreted as the term to search for.
+The script will ask for any missing data interactively.
 
-If more than 1 article matches term, it will ask you to pick one.
+If more than 1 article matches the search term, it will also ask you to pick one.
 
 ```bash
 # interactive
 wiki-translate-cli
 
 # interactive (will ask for sourceLang and targetLang only)
-wiki-translate-cli "python programming language"
+wiki-translate-cli python programming language --from en
 
 # non-interactive (if only one match is found)
-wiki-translate-cli "python programming language" en es
+wiki-translate-cli python programming language --from en --to es
 ```

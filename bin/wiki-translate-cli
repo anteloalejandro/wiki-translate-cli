@@ -2,5 +2,18 @@
 
 import { run } from "../index.js";
 
+const args = process.argv.slice(2);
 
-run(...process.argv.slice(2));
+function getArg(key) {
+  const idx = args.indexOf(key);
+  if (idx == -1 || idx+1 == args.length) return undefined;
+  const [_, value] = args.splice(idx, 2);
+  return value;
+}
+
+run({
+  targetLang: getArg('--to'),
+  sourceLang: getArg('--from'),
+  promptLang: getArg('--prompt-lang'),
+  term: args.join(' ').trim()
+});
