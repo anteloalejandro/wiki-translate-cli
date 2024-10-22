@@ -3,6 +3,7 @@ import { search as wikiSearch, getTranslation } from "wiki-translator";
 import { languages } from "wiki-translator/languages.js";
 import fuzzysearch from 'fuzzysearch';
 import colors from 'yoctocolors-cjs';
+import { getText, setTextLang } from "./translations.js";
 
 const langObj = Array.from(languages).map(([a, b]) => ({ name: a, value: b }));
 function fuzzyLang(input) {
@@ -48,16 +49,17 @@ async function searchLanguage(message) {
 }
 
 export async function run(term, sourceLang, targetLang) {
-  if (!sourceLang) {
-    sourceLang = await searchLanguage("Source Language: ");
-    if (!sourceLang) return;
-  }
-
   if (!targetLang) {
-    targetLang = await searchLanguage("Target Language: ");
+    targetLang = await searchLanguage(`${getText("target-language")}: `);
     if (!targetLang) return;
   }
 
+  setTextLang(targetLang);
+
+  if (!sourceLang) {
+    sourceLang = await searchLanguage(`${getText("source-language")}: `);
+    if (!sourceLang) return;
+  }
 
   let translation = null;
   let confirmation = true
@@ -69,7 +71,7 @@ export async function run(term, sourceLang, targetLang) {
         id = pages.length == 1
           ? pages[0].pageid
           : await select({
-            message: "Matches: ",
+            message: `${getText("matches")}: `,
             choices: pages.map(o => ({
               value: o.pageid,
               name: o.title,
@@ -79,7 +81,7 @@ export async function run(term, sourceLang, targetLang) {
       }
     } else {
       id = await search({
-        message: "Type a term!",
+        message: getText("type-a-term"),
         source: async (input, { signal }) => {
           await sleep(300);
           if (signal.aborted || !input || input.length < 3) return [];
@@ -98,14 +100,14 @@ export async function run(term, sourceLang, targetLang) {
     translation = await getTranslation(id, sourceLang, targetLang);
     if (!translation) {
       confirmation = await confirm({
-        message: colors.red("Could not find term. Try again?")
+        message: colors.red(getText("could-not-find-term"))
       })
     }
   } while (!translation && confirmation);
 
   if (translation)
     console.log(
-      colors.bold("Translation: ") + colors.greenBright(translation.title) + '\n'
+      colors.bold(`${getText("translation")}: `) + colors.greenBright(translation.title) + '\n'
       + colors.bold("URL: ") + colors.blueBright(colors.underline(translation.url))
     );
 }
